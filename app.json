@@ -1,0 +1,1746 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.sensibo",
+  "version": "1.12.0",
+  "compatibility": ">=8.1.0",
+  "sdk": 3,
+  "brandColor": "#1BB7E9",
+  "name": {
+    "en": "Sensibo"
+  },
+  "description": {
+    "en": "Make your air conditioner smart"
+  },
+  "category": [
+    "climate"
+  ],
+  "tags": {
+    "en": [
+      "sensibo",
+      "temperature control",
+      "heating",
+      "humidity",
+      "hvac"
+    ]
+  },
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "permissions": [],
+  "author": {
+    "name": "Bjørnar Almli"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Bjørnar Almli",
+        "email": "bjornar.almli@gmail.com"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "bjornaralmli"
+      }
+    }
+  },
+  "homeyCommunityTopicId": 28990,
+  "flow": {
+    "triggers": [
+      {
+        "id": "air_quality_changed",
+        "title": {
+          "en": "Air quality changed"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=SensiboPure"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "air_quality",
+            "type": "string",
+            "title": {
+              "en": "Air quality"
+            },
+            "example": "Excellent"
+          }
+        ]
+      },
+      {
+        "id": "se_ac_state_changed",
+        "title": {
+          "en": "AC state changed"
+        },
+        "tokens": [
+          {
+            "name": "status",
+            "type": "string",
+            "title": {
+              "en": "Status"
+            },
+            "example": "Success"
+          },
+          {
+            "name": "reason",
+            "type": "string",
+            "title": {
+              "en": "Reason"
+            },
+            "example": "ScheduledCommand"
+          },
+          {
+            "name": "failureReason",
+            "type": "string",
+            "title": {
+              "en": "Failure reason"
+            },
+            "example": "Some reason"
+          },
+          {
+            "name": "on",
+            "type": "boolean",
+            "title": {
+              "en": "On"
+            },
+            "example": true
+          },
+          {
+            "name": "fanLevel",
+            "type": "string",
+            "title": {
+              "en": "Fan level"
+            },
+            "example": "low"
+          },
+          {
+            "name": "targetTemperature",
+            "type": "number",
+            "title": {
+              "en": "Target temperature"
+            },
+            "example": 23
+          },
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode"
+            },
+            "example": "cool"
+          },
+          {
+            "name": "swing",
+            "type": "string",
+            "title": {
+              "en": "Swing"
+            },
+            "example": "stopped"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo"
+          }
+        ]
+      },
+      {
+        "id": "se_climate_react_changed",
+        "title": {
+          "en": "Climate React changed"
+        },
+        "tokens": [
+          {
+            "name": "climate_react_enabled",
+            "type": "boolean",
+            "title": {
+              "en": "Climate React enabled"
+            },
+            "example": true
+          },
+          {
+            "name": "climate_react",
+            "type": "string",
+            "title": {
+              "en": "Climate React"
+            },
+            "example": "enabled"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo"
+          }
+        ]
+      },
+      {
+        "id": "se_offline",
+        "title": {
+          "en": "Device offline"
+        },
+        "tokens": [
+          {
+            "name": "seconds_ago",
+            "type": "number",
+            "title": {
+              "en": "Last seen seconds"
+            },
+            "example": 300
+          },
+          {
+            "name": "last_seen",
+            "type": "string",
+            "title": {
+              "en": "Last seen"
+            },
+            "example": "10:01:02"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo|SensiboPure|SensiboRoomSensor"
+          }
+        ]
+      },
+      {
+        "id": "se_onoff_false",
+        "title": {
+          "en": "Device turned off"
+        },
+        "tokens": [
+          {
+            "name": "state",
+            "type": "number",
+            "title": {
+              "en": "State"
+            },
+            "example": 0
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      },
+      {
+        "id": "se_onoff_true",
+        "title": {
+          "en": "Device turned on"
+        },
+        "tokens": [
+          {
+            "name": "state",
+            "type": "number",
+            "title": {
+              "en": "State"
+            },
+            "example": 1
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      },
+      {
+        "id": "se_timer_created",
+        "title": {
+          "en": "Timer created"
+        },
+        "tokens": [
+          {
+            "name": "homey",
+            "type": "boolean",
+            "title": {
+              "en": "From Homey flow"
+            },
+            "example": true
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      },
+      {
+        "id": "se_timer_deleted",
+        "title": {
+          "en": "Timer deleted"
+        },
+        "tokens": [
+          {
+            "name": "homey",
+            "type": "boolean",
+            "title": {
+              "en": "From Homey flow"
+            },
+            "example": true
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      },
+      {
+        "id": "se_timer_fired",
+        "title": {
+          "en": "Timer fired"
+        },
+        "tokens": [
+          {
+            "name": "state",
+            "type": "number",
+            "title": {
+              "en": "State"
+            },
+            "example": 1
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "light_on",
+        "title": {
+          "en": "Is light turned !{{on|off}}"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      },
+      {
+        "id": "se_climate_react_enabled",
+        "title": {
+          "en": "Climate React is !{{enabled|disabled}}"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo"
+          }
+        ]
+      },
+      {
+        "id": "se_onoff_is_on",
+        "title": {
+          "en": "Device is !{{on|off}}"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      },
+      {
+        "id": "se_timer_enabled",
+        "title": {
+          "en": "Timer is !{{enabled|disabled}}"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "sensibo_cr",
+        "title": {
+          "en": "Control Climate React"
+        },
+        "titleFormatted": {
+          "en": "Climate React [[enabled]]"
+        },
+        "hint": {
+          "en": "Enable or disable Climate React"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo"
+          },
+          {
+            "name": "enabled",
+            "title": {
+              "en": "Enabled"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "on",
+                "label": {
+                  "en": "On"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sensibo_delete_timer",
+        "title": {
+          "en": "Delete timer"
+        },
+        "hint": {
+          "en": "Delete the current timer"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      },
+      {
+        "id": "sensibo_fandirection",
+        "deprecated": true,
+        "title": {
+          "en": "Set swing"
+        },
+        "titleFormatted": {
+          "en": "Set swing to [[fanDirection]]"
+        },
+        "hint": {
+          "en": "Set the fan direction"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo"
+          },
+          {
+            "name": "fanDirection",
+            "title": {
+              "en": "Swing"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "stopped",
+                "label": {
+                  "en": "Stopped"
+                }
+              },
+              {
+                "id": "fixedBottom",
+                "label": {
+                  "en": "Fixed bottom"
+                }
+              },
+              {
+                "id": "fixedMiddleBottom",
+                "label": {
+                  "en": "Fixed middle bottom"
+                }
+              },
+              {
+                "id": "fixedMiddle",
+                "label": {
+                  "en": "Fixed middle"
+                }
+              },
+              {
+                "id": "fixedMiddleTop",
+                "label": {
+                  "en": "Fixed middle top"
+                }
+              },
+              {
+                "id": "fixedTop",
+                "label": {
+                  "en": "Fixed top"
+                }
+              },
+              {
+                "id": "rangeBottom",
+                "label": {
+                  "en": "Range bottom"
+                }
+              },
+              {
+                "id": "rangeMiddle",
+                "label": {
+                  "en": "Range middle"
+                }
+              },
+              {
+                "id": "rangeTop",
+                "label": {
+                  "en": "Range top"
+                }
+              },
+              {
+                "id": "rangeFull",
+                "label": {
+                  "en": "Range full"
+                }
+              },
+              {
+                "id": "horizontal",
+                "label": {
+                  "en": "Horizontal"
+                }
+              },
+              {
+                "id": "both",
+                "label": {
+                  "en": "Both"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sensibo_fanlevel",
+        "deprecated": true,
+        "title": {
+          "en": "Set the fan level"
+        },
+        "titleFormatted": {
+          "en": "Set fan level to [[fanLevel]]"
+        },
+        "hint": {
+          "en": "Set the fan level (auto, high, medium or low)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo"
+          },
+          {
+            "name": "fanLevel",
+            "title": {
+              "en": "Fan level"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium"
+                }
+              },
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sensibo_fanlevel2",
+        "title": {
+          "en": "Set the fan level"
+        },
+        "titleFormatted": {
+          "en": "Set the fan level to [[fanLevel]]"
+        },
+        "hint": {
+          "en": "Set the fan level"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          },
+          {
+            "name": "fanLevel",
+            "label": {
+              "en": "Fan level"
+            },
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Fan level..."
+            }
+          }
+        ]
+      },
+      {
+        "id": "sensibo_horizontal_swing",
+        "title": {
+          "en": "Set horizontal swing"
+        },
+        "titleFormatted": {
+          "en": "Set horizontal swing to [[horizontalSwing]]"
+        },
+        "hint": {
+          "en": "Set the horizontal swing"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo"
+          },
+          {
+            "name": "horizontalSwing",
+            "label": {
+              "en": "Horizontal swing"
+            },
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Horizontal swing..."
+            }
+          }
+        ]
+      },
+      {
+        "id": "sensibo_light",
+        "deprecated": true,
+        "title": {
+          "en": "Control light"
+        },
+        "titleFormatted": {
+          "en": "Turn light [[state]]"
+        },
+        "hint": {
+          "en": "Control light"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          },
+          {
+            "name": "state",
+            "title": {
+              "en": "Light state"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "on",
+                "label": {
+                  "en": "On"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sensibo_light2",
+        "title": {
+          "en": "Control light"
+        },
+        "titleFormatted": {
+          "en": "Turn light [[state]]"
+        },
+        "hint": {
+          "en": "Control light"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          },
+          {
+            "name": "state",
+            "label": {
+              "en": "Light state"
+            },
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Light state..."
+            }
+          }
+        ]
+      },
+      {
+        "id": "sensibo_mode",
+        "deprecated": true,
+        "title": {
+          "en": "Set the fan mode"
+        },
+        "titleFormatted": {
+          "en": "Set the fan mode to [[mode]]"
+        },
+        "hint": {
+          "en": "Set the mode (heat, cool, fan, auto or dry)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo"
+          },
+          {
+            "name": "mode",
+            "title": {
+              "en": "Mode"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "cool",
+                "label": {
+                  "en": "Cool"
+                }
+              },
+              {
+                "id": "heat",
+                "label": {
+                  "en": "Heat"
+                }
+              },
+              {
+                "id": "fan",
+                "label": {
+                  "en": "Fan"
+                }
+              },
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto"
+                }
+              },
+              {
+                "id": "dry",
+                "label": {
+                  "en": "Dry"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sensibo_mode2",
+        "title": {
+          "en": "Set the fan mode"
+        },
+        "titleFormatted": {
+          "en": "Set the fan mode to [[mode]]"
+        },
+        "hint": {
+          "en": "Set the mode"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo"
+          },
+          {
+            "name": "mode",
+            "label": {
+              "en": "Mode"
+            },
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Mode..."
+            }
+          }
+        ]
+      },
+      {
+        "id": "sensibo_off",
+        "title": {
+          "en": "Turn off"
+        },
+        "hint": {
+          "en": "Turn off"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      },
+      {
+        "id": "sensibo_on",
+        "title": {
+          "en": "Turn on"
+        },
+        "hint": {
+          "en": "Turn on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          }
+        ]
+      },
+      {
+        "id": "sensibo_pureboost",
+        "title": {
+          "en": "Control Pure Boost"
+        },
+        "titleFormatted": {
+          "en": "Pure Boost [[enabled]]"
+        },
+        "hint": {
+          "en": "Enable or disable Pure Boost"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo|SensiboPure"
+          },
+          {
+            "name": "enabled",
+            "title": {
+              "en": "Enabled"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "on",
+                "label": {
+                  "en": "On"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sensibo_set_timer",
+        "title": {
+          "en": "Set timer"
+        },
+        "titleFormatted": {
+          "en": "Set timer [[minutesFromNow]], [[on]], [[mode]], [[fanLevel]], [[targetTemperature]]"
+        },
+        "hint": {
+          "en": "Set minutes from now and select one or more parameters to be changed when the timer fires."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo"
+          },
+          {
+            "name": "minutesFromNow",
+            "type": "number",
+            "min": 1,
+            "max": 1440,
+            "step": 1,
+            "placeholder": {
+              "en": "Minutes from now"
+            }
+          },
+          {
+            "name": "on",
+            "title": {
+              "en": "On / off"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "nop",
+                "label": {
+                  "en": "- Unchanged -"
+                }
+              },
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "on",
+                "label": {
+                  "en": "On"
+                }
+              }
+            ]
+          },
+          {
+            "name": "mode",
+            "title": {
+              "en": "Mode"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "nop",
+                "label": {
+                  "en": "- Unchanged -"
+                }
+              },
+              {
+                "id": "cool",
+                "label": {
+                  "en": "Cool"
+                }
+              },
+              {
+                "id": "heat",
+                "label": {
+                  "en": "Heat"
+                }
+              },
+              {
+                "id": "fan",
+                "label": {
+                  "en": "Fan"
+                }
+              },
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto"
+                }
+              },
+              {
+                "id": "dry",
+                "label": {
+                  "en": "Dry"
+                }
+              }
+            ]
+          },
+          {
+            "name": "fanLevel",
+            "title": {
+              "en": "Fan level"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "nop",
+                "label": {
+                  "en": "- Unchanged -"
+                }
+              },
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium"
+                }
+              },
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low"
+                }
+              }
+            ]
+          },
+          {
+            "name": "targetTemperature",
+            "type": "range",
+            "min": 0,
+            "max": 30,
+            "step": 1,
+            "label": "°C",
+            "labelDecimals": 0,
+            "title": {
+              "en": "Target temperature"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sensibo_set_timer_pure",
+        "title": {
+          "en": "Set timer"
+        },
+        "titleFormatted": {
+          "en": "Set timer [[minutesFromNow]], [[on]], [[fanLevel]]"
+        },
+        "hint": {
+          "en": "Set minutes from now and select one or more parameters to be changed when the timer fires."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=SensiboPure"
+          },
+          {
+            "name": "minutesFromNow",
+            "type": "number",
+            "min": 1,
+            "max": 1440,
+            "step": 1,
+            "placeholder": {
+              "en": "Minutes from now"
+            }
+          },
+          {
+            "name": "on",
+            "title": {
+              "en": "On / off"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "nop",
+                "label": {
+                  "en": "- Unchanged -"
+                }
+              },
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "on",
+                "label": {
+                  "en": "On"
+                }
+              }
+            ]
+          },
+          {
+            "name": "fanLevel",
+            "title": {
+              "en": "Fan level"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "nop",
+                "label": {
+                  "en": "- Unchanged -"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High"
+                }
+              },
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sensibo_swing",
+        "title": {
+          "en": "Set swing"
+        },
+        "titleFormatted": {
+          "en": "Set swing to [[swing]]"
+        },
+        "hint": {
+          "en": "Set the swing"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo"
+          },
+          {
+            "name": "swing",
+            "label": {
+              "en": "Swing"
+            },
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Swing..."
+            }
+          }
+        ]
+      },
+      {
+        "id": "sensibo_sync_state",
+        "title": {
+          "en": "Sync power state"
+        },
+        "titleFormatted": {
+          "en": "Sync power state [[state]]"
+        },
+        "hint": {
+          "en": "Sync the power state of the Sensibo"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=Sensibo"
+          },
+          {
+            "name": "state",
+            "title": {
+              "en": "Power state"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "on",
+                "label": {
+                  "en": "On"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "icon": "/drivers/Sensibo/assets/icon.svg",
+      "images": {
+        "large": "/drivers/Sensibo/assets/images/large.png",
+        "small": "/drivers/Sensibo/assets/images/small.png"
+      },
+      "connectivity": [
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "enter_api_key"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "enter_api_key"
+        }
+      ],
+      "id": "Sensibo",
+      "name": {
+        "en": "Sensibo"
+      },
+      "class": "thermostat",
+      "capabilities": [
+        "se_onoff",
+        "target_temperature",
+        "thermostat_mode",
+        "se_fanlevel",
+        "se_fandirection",
+        "measure_temperature",
+        "measure_humidity",
+        "se_last_seen"
+      ],
+      "capabilitiesOptions": {
+        "se_onoff": {
+          "greyout": true
+        },
+        "target_temperature": {
+          "decimals": 0,
+          "min": 10,
+          "max": 30,
+          "step": 1
+        }
+      },
+      "settings": [
+        {
+          "id": "Polling_Interval",
+          "type": "number",
+          "label": {
+            "en": "Polling interval"
+          },
+          "value": 60,
+          "min": 15,
+          "max": 300,
+          "hint": {
+            "en": "Polling interval (seconds)"
+          }
+        },
+        {
+          "id": "Delay_Offline",
+          "type": "number",
+          "label": {
+            "en": "Delay for offline"
+          },
+          "value": 300,
+          "min": 120,
+          "max": 3600,
+          "hint": {
+            "en": "Delay when checking if the device is offline (seconds)"
+          }
+        }
+      ]
+    },
+    {
+      "icon": "/drivers/SensiboPure/assets/icon.svg",
+      "images": {
+        "large": "/drivers/SensiboPure/assets/images/large.png",
+        "small": "/drivers/SensiboPure/assets/images/small.png"
+      },
+      "connectivity": [
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "enter_api_key"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "enter_api_key"
+        }
+      ],
+      "id": "SensiboPure",
+      "name": {
+        "en": "Sensibo Pure"
+      },
+      "class": "fan",
+      "capabilities": [
+        "se_onoff",
+        "se_fanlevel_pure",
+        "air_quality",
+        "se_last_seen",
+        "se_last_seen_seconds"
+      ],
+      "capabilitiesOptions": {
+        "se_onoff": {
+          "greyout": true
+        }
+      },
+      "settings": [
+        {
+          "id": "Polling_Interval",
+          "type": "number",
+          "label": {
+            "en": "Polling interval"
+          },
+          "value": 60,
+          "min": 15,
+          "max": 300,
+          "hint": {
+            "en": "Polling interval (seconds)"
+          }
+        },
+        {
+          "id": "Delay_Offline",
+          "type": "number",
+          "label": {
+            "en": "Delay for offline"
+          },
+          "value": 300,
+          "min": 120,
+          "max": 3600,
+          "hint": {
+            "en": "Delay when checking if the device is offline (seconds)"
+          }
+        }
+      ]
+    },
+    {
+      "icon": "/drivers/SensiboRoomSensor/assets/icon.svg",
+      "images": {
+        "large": "/drivers/SensiboRoomSensor/assets/images/large.png",
+        "small": "/drivers/SensiboRoomSensor/assets/images/small.png"
+      },
+      "connectivity": [
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "enter_api_key"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "enter_api_key"
+        }
+      ],
+      "id": "SensiboRoomSensor",
+      "name": {
+        "en": "Sensibo Room Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_temperature",
+        "measure_humidity",
+        "se_last_seen"
+      ],
+      "settings": [
+        {
+          "id": "Polling_Interval",
+          "type": "number",
+          "label": {
+            "en": "Polling interval"
+          },
+          "value": 60,
+          "min": 15,
+          "max": 300,
+          "hint": {
+            "en": "Polling interval (seconds)"
+          }
+        },
+        {
+          "id": "Delay_Offline",
+          "type": "number",
+          "label": {
+            "en": "Delay for offline"
+          },
+          "value": 300,
+          "min": 120,
+          "max": 3600,
+          "hint": {
+            "en": "Delay when checking if the device is offline (seconds)"
+          }
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "air_quality": {
+      "type": "string",
+      "title": {
+        "en": "Air quality"
+      },
+      "desc": {
+        "en": "Air quality"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/air_quality.svg",
+      "insights": false
+    },
+    "se_climate_react": {
+      "type": "enum",
+      "title": {
+        "en": "Climate React"
+      },
+      "desc": {
+        "en": "Climate React"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "insights": false,
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off"
+          }
+        },
+        {
+          "id": "on",
+          "title": {
+            "en": "On"
+          }
+        }
+      ]
+    },
+    "se_fandirection": {
+      "type": "enum",
+      "title": {
+        "en": "Swing"
+      },
+      "desc": {
+        "en": "Swing"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "insights": false,
+      "values": [
+        {
+          "id": "stopped",
+          "title": {
+            "en": "Stopped"
+          }
+        },
+        {
+          "id": "fixedBottom",
+          "title": {
+            "en": "Fixed bottom"
+          }
+        },
+        {
+          "id": "fixedMiddleBottom",
+          "title": {
+            "en": "Fixed middle bottom"
+          }
+        },
+        {
+          "id": "fixedMiddle",
+          "title": {
+            "en": "Fixed middle"
+          }
+        },
+        {
+          "id": "fixedMiddleTop",
+          "title": {
+            "en": "Fixed middle top"
+          }
+        },
+        {
+          "id": "fixedTop",
+          "title": {
+            "en": "Fixed top"
+          }
+        },
+        {
+          "id": "rangeBottom",
+          "title": {
+            "en": "Range bottom"
+          }
+        },
+        {
+          "id": "rangeMiddle",
+          "title": {
+            "en": "Range middle"
+          }
+        },
+        {
+          "id": "rangeTop",
+          "title": {
+            "en": "Range top"
+          }
+        },
+        {
+          "id": "rangeFull",
+          "title": {
+            "en": "Range full"
+          }
+        },
+        {
+          "id": "horizontal",
+          "title": {
+            "en": "Horizontal"
+          }
+        },
+        {
+          "id": "both",
+          "title": {
+            "en": "Both"
+          }
+        }
+      ]
+    },
+    "se_fanlevel": {
+      "type": "enum",
+      "title": {
+        "en": "Fan level"
+      },
+      "desc": {
+        "en": "Fan level"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "insights": false,
+      "values": [
+        {
+          "id": "auto",
+          "title": {
+            "en": "Auto"
+          }
+        },
+        {
+          "id": "high",
+          "title": {
+            "en": "High"
+          }
+        },
+        {
+          "id": "medium_high",
+          "title": {
+            "en": "Medium high"
+          }
+        },
+        {
+          "id": "medium",
+          "title": {
+            "en": "Medium"
+          }
+        },
+        {
+          "id": "medium_low",
+          "title": {
+            "en": "Medium low"
+          }
+        },
+        {
+          "id": "low",
+          "title": {
+            "en": "Low"
+          }
+        },
+        {
+          "id": "quiet",
+          "title": {
+            "en": "Quiet"
+          }
+        }
+      ]
+    },
+    "se_fanlevel_pure": {
+      "type": "enum",
+      "title": {
+        "en": "Fan level"
+      },
+      "desc": {
+        "en": "Fan level"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "insights": false,
+      "values": [
+        {
+          "id": "high",
+          "title": {
+            "en": "High"
+          }
+        },
+        {
+          "id": "low",
+          "title": {
+            "en": "Low"
+          }
+        }
+      ]
+    },
+    "se_horizontal_swing": {
+      "type": "enum",
+      "title": {
+        "en": "Horizontal swing"
+      },
+      "desc": {
+        "en": "Horizontal swing"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "insights": false,
+      "values": [
+        {
+          "id": "stopped",
+          "title": {
+            "en": "Stopped"
+          }
+        },
+        {
+          "id": "fixedLeft",
+          "title": {
+            "en": "Fixed left"
+          }
+        },
+        {
+          "id": "fixedCenterLeft",
+          "title": {
+            "en": "Fixed center left"
+          }
+        },
+        {
+          "id": "fixedCenter",
+          "title": {
+            "en": "Fixed center"
+          }
+        },
+        {
+          "id": "fixedCenterRight",
+          "title": {
+            "en": "Fixed center right"
+          }
+        },
+        {
+          "id": "fixedRight",
+          "title": {
+            "en": "Fixed right"
+          }
+        },
+        {
+          "id": "fixedLeftRight",
+          "title": {
+            "en": "Fixed left right"
+          }
+        },
+        {
+          "id": "rangeCenter",
+          "title": {
+            "en": "Range center"
+          }
+        },
+        {
+          "id": "rangeFull",
+          "title": {
+            "en": "Range full"
+          }
+        }
+      ]
+    },
+    "se_last_seen": {
+      "type": "string",
+      "title": {
+        "en": "Last seen"
+      },
+      "desc": {
+        "en": "Last seen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/clock.svg",
+      "insights": false
+    },
+    "se_last_seen_seconds": {
+      "type": "number",
+      "title": {
+        "en": "Last seen seconds ago"
+      },
+      "desc": {
+        "en": "Last seen seconds ago"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": null,
+      "insights": false
+    },
+    "se_onoff": {
+      "type": "boolean",
+      "title": {
+        "en": "State"
+      },
+      "desc": {
+        "en": "State of the device"
+      },
+      "getable": true,
+      "setable": true,
+      "uiQuickAction": true,
+      "greyout": true
+    }
+  }
+}
