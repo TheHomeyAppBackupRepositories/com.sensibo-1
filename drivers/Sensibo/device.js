@@ -1,6 +1,6 @@
 'use strict';
 
-const BaseDevice = require('../../lib/BaseDevice');
+const BaseDevice = require('../BaseDevice');
 
 module.exports = class SensiboDevice extends BaseDevice {
 
@@ -95,9 +95,9 @@ module.exports = class SensiboDevice extends BaseDevice {
       this.clearCheckData();
       if (this.hasCapability('se_climate_react')) {
         this.log(`Fetching AC state for: ${this._sensibo.getDeviceId()}`);
-        let acStatesData = await this._sensibo.getAcStates();
+        const acStatesData = await this._sensibo.getAcStates();
         await this.onAcStatesReceived(acStatesData);
-        let climateReactSettings = await this._sensibo.getClimateReactSettings();
+        const climateReactSettings = await this._sensibo.getClimateReactSettings();
         await this.onClimateReactSettingsReceived(climateReactSettings);
       }
     } catch (err) {
@@ -109,13 +109,11 @@ module.exports = class SensiboDevice extends BaseDevice {
 
   async onAcStatesReceived(data) {
     if (data.data) {
-      let curAcStates = data.data.result;
-      this.log(`AC States for: ${this._sensibo.getDeviceId()}`, curAcStates.length, curAcStates.map(acs => acs.id));
+      const curAcStates = data.data.result;
+      this.log(`AC States for: ${this._sensibo.getDeviceId()}`, curAcStates.length, curAcStates.map((acs) => acs.id));
       if (this._lastAcStatesIds) {
-        for (let anAcState of curAcStates) {
-          if (this._lastAcStatesIds[anAcState.id]) {
-            break;
-          }
+        for (const anAcState of curAcStates) {
+          if (this._lastAcStatesIds[anAcState.id]) break;
           const payload = {
             status: anAcState.status,
             reason: anAcState.reason,
@@ -126,11 +124,13 @@ module.exports = class SensiboDevice extends BaseDevice {
             swing: anAcState.acState.swing ? anAcState.acState.swing : '',
             failureReason: anAcState.failureReason ? anAcState.failureReason : '',
           };
-          this.homey.app._acStateChangedTrigger.trigger(this, payload, {});
-          this.log(`AC State change triggered: ${this._sensibo.getDeviceId()}`, anAcState.id, payload);
+          this.homey.app._acStateChangedTrigger
+            .trigger(this, payload, {})
+            .then(() => this.log(`AC State change triggered: ${this._sensibo.getDeviceId()}`, anAcState.id, payload))
+            .catch((err) => this.log('Error triggering AC State change:', err));
         }
       }
-      this._lastAcStatesIds = curAcStates.reduce(function (map, obj) {
+      this._lastAcStatesIds = curAcStates.reduce((map, obj) => {
         map[obj.id] = obj.id;
         return map;
       }, {});
@@ -139,16 +139,21 @@ module.exports = class SensiboDevice extends BaseDevice {
 
   async onClimateReactSettingsReceived(data) {
     if (data.data) {
-      let result = data.data.result;
-      this.log(`Climate React settings for: ${this._sensibo.getDeviceId()}: enabled: ${result.enabled}`);
-      await this.updateIfChanged('se_climate_react', result.enabled ? 'on' : 'off');
-      if (this._lastClimateReact !== undefined && this._lastClimateReact !== result.enabled) {
-        this.homey.app._climateReactChangedTrigger.trigger(this, {
-          climate_react_enabled: result.enabled,
-          climate_react: result.enabled ? 'enabled' : 'disabled',
-        }, {});
+      const { result } = data.data;
+      if (result.enabled !== undefined) {
+        this.log(`Climate React settings for: ${this._sensibo.getDeviceId()}: enabled: ${result.enabled}`);
+        await this.updateIfChanged('se_climate_react', result.enabled ? 'on' : 'off');
+        if (this._lastClimateReact !== undefined && this._lastClimateReact !== result.enabled) {
+          this.homey.app._climateReactChangedTrigger
+            .trigger(this, {
+              climate_react_enabled: result.enabled,
+              climate_react: result.enabled ? 'enabled' : 'disabled',
+            }, {})
+            .then(() => this.log(`Climate React change triggered: ${this._sensibo.getDeviceId()}`, result.enabled))
+            .catch((err) => this.log('Error triggering Climate React change:', err));
+        }
+        this._lastClimateReact = result.enabled;
       }
-      this._lastClimateReact = result.enabled;
     }
   }
 
